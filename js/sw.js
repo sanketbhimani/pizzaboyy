@@ -1,13 +1,13 @@
 var cacheName = 'pizzaboyy-v1';
-var filesToCache = ['/',
-  '/index.html',
-  '/js/app.js',
-  '/js/angular.min.js',
-  '/js/material.min.js',
-  '/js/jquery-3.2.0.min.js',
-  '/css/material.min.css',
-  '/font/font',
-  '/font/fonts.woff2'];
+var filesToCache = ['../',
+  '../index.html',
+  '../js/app.js',
+  '../js/angular.min.js',
+  '../js/material.min.js',
+  '../js/jquery-3.2.0.min.js',
+  '../css/material.min.css',
+  '../font/font',
+  '../font/fonts.woff2'];
 
 self.addEventListener('install',function(e){
   //console.log('[ServiceWorker] install');         //function for caching the app shell & install the SW
