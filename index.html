@@ -2,18 +2,30 @@
     <head>
         <script src="./js/jquery-3.2.0.min.js"></script>
         <script src="./js/angular.min.js"></script>
-        <script src="./js/material.min.js"></script>
-        <script src="./js/app.js"></script>
-        <link href="./css/material.min.css"/>
-        <link href="./font/font"/>
+        <script src="./js/materialize.min.js"></script>
+        <!--<script src="./js/app.js"></script>-->
+        <link rel="stylesheet" href="./css/materialize.min.css"/>
+        <link rel="stylesheet prefetch" href="./font/font"/>
         <link rel = "manifest" href = "manifest.json">
         <meta name = "theme-color" content="#2F3BA2">
         <meta name = "apple-mobile-web-app-capable" content="yes">
         <meta name = "apple-mobile-web-app-status-bar-style" content="black-translucent">
         <meta name = "apple-mobile-web-app-title" content="PizzaBoyy">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PizzaBoyy</title>
     </head>
-    <body>
-        
+    <body style="background-color: #ccc;">
+        <nav>
+            <div class="nav-wrapper">
+                <span class="brand-logo">PizzaBoyy</span>
+            </div>
+        </nav>
+        <div style="position:absolute; z-index:1000; bottom: 15; right: 15;">
+            <a class="btn-floating btn-large waves-effect waves-light red">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
+        <div class="container white" style="margin: 6px; border-radius: 5px; width: 98%; height: 98%; border: 2px solid #ffffff;">
+        </div>
     </body>
 </html>
