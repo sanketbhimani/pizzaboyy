@@ -1,4 +1,4 @@
-var cacheName = 'pizzaboyy-v1';
+var cacheName = 'pizzaboyy-v2';
 var filesToCache = ['./',
   'index.html',
   'js/app.js',
