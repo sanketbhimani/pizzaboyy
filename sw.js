@@ -1,5 +1,5 @@
 var cacheName = 'pizzaboyy-v3';
-var filesToCache = ['./',
+var filesToCache = [
     'index.html',
     'js/app.js',
     'js/angular.min.js',
