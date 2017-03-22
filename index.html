@@ -228,193 +228,226 @@
                 </div>
             </div>
         </div>
-        <script>
-            $(document).ready(function() {
-                fill_order();
-            });
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loader" class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            fill_order();
+            $('.container').hide();
+            $('.loader').show();
+        });
 
-            function fill_order() {
-                if ((readCookie('cnt') === null) || (readCookie('cnt') === '0')) {
-                    $(".no_orders").html("<blockquote>No past orders,<br>click '+' to place order!</blockquote>");
-                } else {
-                    $(".no_orders").html("");
-                }
-                $('.order_data').html('');
-                var cnt = readCookie('cnt');
-                for (var i = 1; i <= cnt; i++) {
-                    var data = '<a href="#" onclick="show_data(\'' + readCookie('order' + i) + '\');" class="collection-item">' + readCookie('order' + i) + '</a>';
-                    $('.order_data').html($('.order_data').html() + data);
-                }
+        function fill_order() {
+            if ((readCookie('cnt') === null) || (readCookie('cnt') === '0')) {
+                $(".no_orders").html("<blockquote>No past orders,<br>click '+' to place order!</blockquote>");
+            } else {
+                $(".no_orders").html("");
             }
-
-            function show_data(id) {
-                $.getJSON('http://138.197.124.3:8080/get_order_details/' + id, function(jd) {
-                    jd = jd[0];
-                    $(".oname").html(jd.name);
-                    $(".ophonenumber").html(jd.phone_number);
-                    $(".ocity").html(jd.city);
-                    $(".oaddress").html(jd.address);
-                    $(".opincode").html(jd.pincode);
-                    $(".ocomment").html(jd.comment);
-                    $(".ocheeses").html(jd.cheeses.join(', '));
-                    $(".otoppings").html(jd.toppings.join(', '));
-                    $(".osauces").html(jd.sauces.join(', '));
-                    $(".ocrust").html(jd.crust);
-                    $(".osize").html(jd.size);
-                    $(".ototal").html(jd.total_price);
-                });
-                $(".order_details").show();
-                $('.orders').hide();
-                $('#add_btn').hide();
+            $('.order_data').html('');
+            var cnt = readCookie('cnt');
+            for (var i = 1; i <= cnt; i++) {
+                var data = '<a href="#" onclick="show_data(\'' + readCookie('order' + i) + '\');" class="collection-item">' + readCookie('order' + i) + '</a>';
+                $('.order_data').html($('.order_data').html() + data);
             }
+        }
 
-            $(".select_cheeses").hide();
-            $(".select_toppings").hide();
-            $(".select_sauces").hide();
-            $(".select_crust").hide();
-            $(".select_size").hide();
-            $(".basic_details").hide();
-            $(".confirm_details").hide();
-            $(".order_details").hide();
-
-            $.getJSON('http://138.197.124.3:8080/get_cheeses', function(jd) {
-                jd.cheeses.forEach(function(cheese, index) {
-                    $(".scheeses").html($(".scheeses").html() + "<div class='col m6 s6'><input type='checkbox' value='" + cheese.type + "' cost='" + cheese.cost + "' id='cheese" + index + "'> <label style='color:black;' for='cheese" + index + "'>" + cheese.type + "(" + cheese.cost + ")" + "</label></div>");
-                });
+        function show_data(id) {
+            $.getJSON('http://138.197.124.3:8080/get_order_details/' + id, function(jd) {
+                jd = jd[0];
+                $(".oname").html(jd.name);
+                $(".ophonenumber").html(jd.phone_number);
+                $(".ocity").html(jd.city);
+                $(".oaddress").html(jd.address);
+                $(".opincode").html(jd.pincode);
+                $(".ocomment").html(jd.comment);
+                $(".ocheeses").html(jd.cheeses.join(', '));
+                $(".otoppings").html(jd.toppings.join(', '));
+                $(".osauces").html(jd.sauces.join(', '));
+                $(".ocrust").html(jd.crust);
+                $(".osize").html(jd.size);
+                $(".ototal").html(jd.total_price);
             });
+            $(".order_details").show();
+            $('.orders').hide();
+            $('#add_btn').hide();
+        }
 
-            $.getJSON('http://138.197.124.3:8080/get_toppings', function(jd) {
-                jd.toppings.forEach(function(topping, index) {
-                    $(".stoppings").html($(".stoppings").html() + "<div class='col m6 s6'><input type='checkbox' value='" + topping.type + "' cost='" + topping.cost + "' id='topping" + index + "'> <label style='color:black;' for='topping" + index + "'>" + topping.type + "(" + topping.cost + ")" + "</label></div>");
-                });
+        $(".select_cheeses").hide();
+        $(".select_toppings").hide();
+        $(".select_sauces").hide();
+        $(".select_crust").hide();
+        $(".select_size").hide();
+        $(".basic_details").hide();
+        $(".confirm_details").hide();
+        $(".order_details").hide();
+
+        $.getJSON('http://138.197.124.3:8080/get_cheeses', function(jd) {
+            jd.cheeses.forEach(function(cheese, index) {
+                $(".scheeses").html($(".scheeses").html() + "<div class='col m6 s6'><input type='checkbox' value='" + cheese.type + "' cost='" + cheese.cost + "' id='cheese" + index + "'> <label style='color:black;' for='cheese" + index + "'>" + cheese.type + "(" + cheese.cost + ")" + "</label></div>");
+            });
+        });
+
+        $.getJSON('http://138.197.124.3:8080/get_toppings', function(jd) {
+            jd.toppings.forEach(function(topping, index) {
+                $(".stoppings").html($(".stoppings").html() + "<div class='col m6 s6'><input type='checkbox' value='" + topping.type + "' cost='" + topping.cost + "' id='topping" + index + "'> <label style='color:black;' for='topping" + index + "'>" + topping.type + "(" + topping.cost + ")" + "</label></div>");
             });
             $.getJSON('http://138.197.124.3:8080/get_sauces', function(jd) {
                 jd.sauces.forEach(function(sauces, index) {
                     $(".ssauces").html($(".ssauces").html() + "<div class='col m6 s6'><input type='checkbox' value='" + sauces.type + "' cost='" + sauces.cost + "' id='sauces" + index + "'> <label style='color:black;' for='sauces" + index + "'>" + sauces.type + "(" + sauces.cost + ")" + "</label></div>");
                 });
-            });
-            $.getJSON('http://138.197.124.3:8080/get_crustes', function(jd) {
-                jd.crustes.forEach(function(crustes, index) {
-                    $(".scrustes").html($(".scrustes").html() + "<div class='col m6 s6'><input type='radio' name='crust' value='" + crustes.type + "' cost='" + crustes.cost + "' id='crustes" + index + "'> <label style='color:black;' for='crustes" + index + "'>" + crustes.type + "(" + crustes.cost + ")" + "</label></div>");
-                    $("#crustes0").attr('checked', 'checked');
+                $.getJSON('http://138.197.124.3:8080/get_crustes', function(jd) {
+                    jd.crustes.forEach(function(crustes, index) {
+                        $(".scrustes").html($(".scrustes").html() + "<div class='col m6 s6'><input type='radio' name='crust' value='" + crustes.type + "' cost='" + crustes.cost + "' id='crustes" + index + "'> <label style='color:black;' for='crustes" + index + "'>" + crustes.type + "(" + crustes.cost + ")" + "</label></div>");
+                        $("#crustes0").attr('checked', 'checked');
+                    });
+                    $.getJSON('http://138.197.124.3:8080/get_sizes', function(jd) {
+                        jd.sizes.forEach(function(sizes, index) {
+                            $(".ssizes").html($(".ssizes").html() + "<div class='col m6 s6'><input type='radio' name='size' value='" + sizes.size + "' cost='" + sizes.cost + "'  id='sizes" + index + "'> <label style='color:black;' for='sizes" + index + "'>" + sizes.size + "(" + sizes.cost + ")" + "</label></div>");
+                            $("#sizes0").attr('checked', 'checked');
+                        });
+                        $('.container').show();
+                        $('.loader').hide();
+                    });
                 });
             });
-            $.getJSON('http://138.197.124.3:8080/get_sizes', function(jd) {
-                jd.sizes.forEach(function(sizes, index) {
-                    $(".ssizes").html($(".ssizes").html() + "<div class='col m6 s6'><input type='radio' name='size' value='" + sizes.size + "' cost='" + sizes.cost + "'  id='sizes" + index + "'> <label style='color:black;' for='sizes" + index + "'>" + sizes.size + "(" + sizes.cost + ")" + "</label></div>");
-                    $("#sizes0").attr('checked', 'checked');
-                });
-            });
+        });
 
-            var cheeses = [];
-            var toppings = [];
-            var sauces = [];
-            var cntc = 0;
-            var cntt = 0;
-            var cnts = 0;
-            var costc = 0;
-            var costt = 0;
-            var costs = 0;
-            var cost_c = 0;
-            var cost_s = 0;
-            var crust;
-            var size;
 
-            function fill() {
-                var searchIDs = $('input:checked').map(function() {
-                    id = $(this).attr("id");
-                    if (id.indexOf("cheese") >= 0) {
-                        cheeses[cntc++] = $(this).val();
-                        costc += parseInt($(this).attr("cost"), 10);
-                    } else if (id.indexOf("topping") >= 0) {
-                        toppings[cntt++] = $(this).val();
-                        costt += parseInt($(this).attr("cost"), 10);
-                    } else if (id.indexOf("sauces") >= 0) {
-                        sauces[cnts++] = $(this).val();
-                        costs += parseInt($(this).attr("cost"), 10);
-                    }
-                });
+        var cheeses = [];
+        var toppings = [];
+        var sauces = [];
+        var cntc = 0;
+        var cntt = 0;
+        var cnts = 0;
+        var costc = 0;
+        var costt = 0;
+        var costs = 0;
+        var cost_c = 0;
+        var cost_s = 0;
+        var crust;
+        var size;
 
-                if (cheeses.length == 0) {
-                    alert('Select atleast one cheese!');
-                    $('.select_cheeses').show();
-                    $('.basic_details').hide();
-                } else if (toppings.length == 0) {
-                    alert('Select atleast one topping!');
-                    $('.select_toppings').show();
-                    $('.basic_details').hide();
-                } else if (sauces.length == 0) {
-                    alert('Select atleast one sauce!');
-                    $('.basic_details').hide();
-                    $('.select_sauces').show();
-                } else if ($("#full_name").val() == '' || $("#phonenumber").val() == '' || $("#city").val() == '' || $("#address").val() == '' || $("#pincode").val() == '') {
-                    alert('Fill all basic details!');
-                    $('.basic_details').show();
-                } else {
-                    crust = $("input[name='crust']:checked").val();
-                    size = $("input[name='size']:checked").val();
-                    cost_c = parseInt($("input[name='crust']:checked").attr("cost"), 10);
-                    cost_s = parseInt($("input[name='crust']:checked").attr("cost"), 10);
-
-                    $(".name").html($("#full_name").val());
-                    $(".phonenumber").html($("#phonenumber").val());
-                    $(".city").html($("#city").val());
-                    $(".address").html($("#address").val());
-                    $(".pincode").html($("#pincode").val());
-                    $(".comment").html($("#comment").val());
-                    $(".cheeses").html(cheeses.toString() + "<br> Total Cost: " + costc);
-                    $(".toppings").html(toppings.toString() + "<br> Total Cost: " + costt);
-                    $(".sauces").html(sauces.toString() + "<br> Total Cost: " + costs);
-                    $(".crust").html(crust + "<br> Cost: " + cost_c);
-                    $(".size").html(size + "<br> Cost: " + cost_s);
-                    $(".total").html(cost_c + " + " + cost_s + " + " + costc + " + " + costs + " + " + costt + " + " + cost_c + " + " + cost_s + " + 60 = " + (costc + costs + costt + cost_c + cost_s + 60));
-                    $('.basic_details').hide();
-                    $('.confirm_details').show();
+        function fill() {
+            var searchIDs = $('input:checked').map(function() {
+                id = $(this).attr("id");
+                if (id.indexOf("cheese") >= 0) {
+                    cheeses[cntc++] = $(this).val();
+                    costc += parseInt($(this).attr("cost"), 10);
+                } else if (id.indexOf("topping") >= 0) {
+                    toppings[cntt++] = $(this).val();
+                    costt += parseInt($(this).attr("cost"), 10);
+                } else if (id.indexOf("sauces") >= 0) {
+                    sauces[cnts++] = $(this).val();
+                    costs += parseInt($(this).attr("cost"), 10);
                 }
-            }
+            });
 
-            function place() {
-                var url = "http://138.197.124.3:8080/place_order?cheeses=" + cheeses.join("&cheeses=") + "&toppings=" + toppings.join("&toppings=") + "&sauces=" + sauces.join("&sauces=") + "&crust=" + crust + "&size=" + size + "&comment=" + $("#comment").val() + "&name=" + $("#full_name").val() + "&address=" + $("#address").val() + "&city=" + $("#city").val() + "&pincode=" + $("#pincode").val() + "&phone_number=" + $("#phonenumber").val() + "&total_price=" + (costc + costs + costt + cost_c + cost_s + 60) + "&date_time=" + new Date() + "&status=placed";
-                $.getJSON(url, function(jd) {
-                    if (jd.error == 0) {
-                        alert("Order Successfully placed and your order id is '" + jd.order_id + "' kindly note this id");
-                        if (readCookie('cnt') != null) {
-                            createCookie('cnt', parseInt(readCookie('cnt'), 10) + 1, 300);
-                        } else {
-                            createCookie('cnt', 1, 300);
-                        }
-                        createCookie('order' + readCookie('cnt'), jd.order_id, 300);
-                        fill_order();
-                        $('.confirm_details').hide();
-                        $('.orders').show();
-                        $('#add_btn').show();
+            if (cheeses.length == 0) {
+                alert('Select atleast one cheese!');
+                $('.select_cheeses').show();
+                $('.basic_details').hide();
+            } else if (toppings.length == 0) {
+                alert('Select atleast one topping!');
+                $('.select_toppings').show();
+                $('.basic_details').hide();
+            } else if (sauces.length == 0) {
+                alert('Select atleast one sauce!');
+                $('.basic_details').hide();
+                $('.select_sauces').show();
+            } else if ($("#full_name").val() == '' || $("#phonenumber").val() == '' || $("#city").val() == '' || $("#address").val() == '' || $("#pincode").val() == '') {
+                alert('Fill all basic details!');
+                $('.basic_details').show();
+            } else {
+                crust = $("input[name='crust']:checked").val();
+                size = $("input[name='size']:checked").val();
+                cost_c = parseInt($("input[name='crust']:checked").attr("cost"), 10);
+                cost_s = parseInt($("input[name='crust']:checked").attr("cost"), 10);
+
+                $(".name").html($("#full_name").val());
+                $(".phonenumber").html($("#phonenumber").val());
+                $(".city").html($("#city").val());
+                $(".address").html($("#address").val());
+                $(".pincode").html($("#pincode").val());
+                $(".comment").html($("#comment").val());
+                $(".cheeses").html(cheeses.toString() + "<br> Total Cost: " + costc);
+                $(".toppings").html(toppings.toString() + "<br> Total Cost: " + costt);
+                $(".sauces").html(sauces.toString() + "<br> Total Cost: " + costs);
+                $(".crust").html(crust + "<br> Cost: " + cost_c);
+                $(".size").html(size + "<br> Cost: " + cost_s);
+                $(".total").html(cost_c + " + " + cost_s + " + " + costc + " + " + costs + " + " + costt + " + " + cost_c + " + " + cost_s + " + 60 = " + (costc + costs + costt + cost_c + cost_s + 60));
+                $('.basic_details').hide();
+                $('.confirm_details').show();
+            }
+        }
+
+        function place() {
+            $('.container').hide();
+            $('.loader').show();
+            var url = "http://138.197.124.3:8080/place_order?cheeses=" + cheeses.join("&cheeses=") + "&toppings=" + toppings.join("&toppings=") + "&sauces=" + sauces.join("&sauces=") + "&crust=" + crust + "&size=" + size + "&comment=" + $("#comment").val() + "&name=" + $("#full_name").val() + "&address=" + $("#address").val() + "&city=" + $("#city").val() + "&pincode=" + $("#pincode").val() + "&phone_number=" + $("#phonenumber").val() + "&total_price=" + (costc + costs + costt + cost_c + cost_s + 60) + "&date_time=" + new Date() + "&status=placed";
+            $.getJSON(url, function(jd) {
+                if (jd.error == 0) {
+                    alert("Order Successfully placed and your order id is '" + jd.order_id + "' kindly note this id");
+                    if (readCookie('cnt') != null) {
+                        createCookie('cnt', parseInt(readCookie('cnt'), 10) + 1, 300);
+                    } else {
+                        createCookie('cnt', 1, 300);
                     }
-                });
-            }
-
-            function createCookie(name, value, days) {
-                if (days) {
-                    var date = new Date();
-                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                    var expires = "; expires=" + date.toGMTString();
-                } else var expires = "";
-
-                document.cookie = name + "=" + value + expires + "; path=/";
-            }
-
-            function readCookie(name) {
-                var nameEQ = name + "=";
-                var ca = document.cookie.split(';');
-                for (var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                    createCookie('order' + readCookie('cnt'), jd.order_id, 300);
+                    fill_order();
+                    $('.confirm_details').hide();
+                    $('.orders').show();
+                    $('#add_btn').show();
+                    $('.container').show();
+                    $('.loader').hide();
                 }
-                return null;
+            });
+        }
+
+        function createCookie(name, value, days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+            } else var expires = "";
+
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
             }
-        </script>
-    </div>
-    <script>
+            return null;
+        }
     </script>
 </body>
 
