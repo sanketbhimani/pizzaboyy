@@ -1,31 +1,266 @@
 <html>
-    <head>
-        <script src="./js/jquery-3.2.0.min.js"></script>
-        <script src="./js/angular.min.js"></script>
-        <script src="./js/materialize.min.js"></script>
-        <!--<script src="./js/app.js"></script>-->
-        <link rel="stylesheet" href="./css/materialize.min.css"/>
-        <link rel="stylesheet prefetch" href="./font/font"/>
-        <link rel = "manifest" href = "manifest.json">
-        <meta name = "theme-color" content="#2F3BA2">
-        <meta name = "apple-mobile-web-app-capable" content="yes">
-        <meta name = "apple-mobile-web-app-status-bar-style" content="black-translucent">
-        <meta name = "apple-mobile-web-app-title" content="PizzaBoyy">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PizzaBoyy</title>
-    </head>
-    <body style="background-color: #ccc;">
-        <nav>
-            <div class="nav-wrapper">
-                <span class="brand-logo">PizzaBoyy</span>
+
+<head>
+    <script src="./js/jquery-3.2.0.min.js"></script>
+    <script src="./js/materialize.min.js"></script>
+    <!--<script src="./js/app.js"></script>-->
+    <link rel="stylesheet" href="./css/materialize.min.css" />
+    <link rel="stylesheet prefetch" href="./font/font" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2F3BA2">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PizzaBoyy">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PizzaBoyy</title>
+</head>
+
+<body style="background-color: #ccc;">
+    <style>
+        .select-dropdown {
+            overflow-y: auto !important;
+        }
+    </style>
+    <nav style="position: fixed; top: 0;">
+        <div class="nav-wrapper">
+            <span class="brand-logo">PizzaBoyy</span>
+        </div>
+    </nav>
+    <div style="position: fixed; z-index:1000; bottom: 15; right: 15;">
+        <a class="btn-floating btn-large waves-effect waves-light red" onclick="$('.select_cheeses').show(); $('.orders').hide();">
+            <i class="material-icons">add</i>
+        </a>
+    </div>
+    <div class="container white" style="margin: 6px; padding: 9px; margin-top: 18%; border-radius: 5px; width: 97%; height: 98%; border: 2px solid #ffffff;">
+        <div class="orders">
+            <span class="no_orders"></span>
+        </div>
+        <div class="place_order">
+            <div class="select_cheeses">
+                <div class="cheeses">
+                    <h3 class="center">Select Cheeses</h3>
+                </div>
+                <a class="waves-effect waves-light btn" onclick="$('.select_cheeses').hide(); $('.select_toppings').show();">next</a>
             </div>
-        </nav>
-        <div style="position:absolute; z-index:1000; bottom: 15; right: 15;">
-            <a class="btn-floating btn-large waves-effect waves-light red">
-                <i class="material-icons">add</i>
-            </a>
+            <div class="select_toppings">
+                <div class="toppings">
+                    <h3 class="center">Select Toppings</h3>
+                </div>
+                <a class="waves-effect waves-light btn" onclick="$('.select_cheeses').show(); $('.select_toppings').hide();">prev</a><a class="waves-effect waves-light btn" onclick="$('.select_sauces').show(); $('.select_toppings').hide();">next</a>
+            </div>
+            <div class="select_sauces">
+                <div class="sauces">
+                    <h3 class="center">Select Sauces</h3>
+                </div>
+                <a class="waves-effect waves-light btn" onclick="$('.select_toppings').show(); $('.select_sauces').hide();">prev</a><a class="waves-effect waves-light btn" onclick="$('.select_crust').show(); $('.select_sauces').hide();">next</a>
+            </div>
+            <div class="select_crust">
+                <div class="crustes">
+                    <h3 class="center">Select Crust</h3>
+                </div>
+                <a class="waves-effect waves-light btn" onclick="$('.select_crust').hide(); $('.select_sauces').show();">prev</a><a class="waves-effect waves-light btn" onclick="$('.select_size').show(); $('.select_crust').hide();">next</a>
+            </div>
+            <div class="select_size">
+                <div class="sizes">
+                    <h3 class="center">Select Size</h3>
+                </div>
+                <a class="waves-effect waves-light btn" onclick="$('.select_size').hide(); $('.select_crust').show();">prev</a><a class="waves-effect waves-light btn" onclick="$('.basic_details').show(); $('.select_size').hide();">next</a>
+            </div>
+            <div class="basic_details">
+                <div class="input-field col s6">
+                    <input id="full_name" type="text" class="validate">
+                    <label for="full_name">Full Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="address" type="text" class="validate">
+                    <label for="address">Address</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="city" type="text" class="validate">
+                    <label for="city">City</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="pincode" type="number" class="validate">
+                    <label for="pincode">Pincode</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="phonenumber" type="number" class="validate">
+                    <label for="phonenumber">Phone Number</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="comment" type="text" class="validate">
+                    <label for="comment">Extra Comment</label>
+                </div>
+                <a class="waves-effect waves-light btn" onclick="$('.select_size').show(); $('.basic_details').hide();">prev</a><a class="waves-effect waves-light btn" onclick="fill();">next</a>
+            </div>
+            <div class="confirm_details">
+                <div class="row">
+                    <div class="col m3 s3">Name:- </div>
+                    <div class="col m8 s8 name"></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">Address:- </div>
+                    <div class="col m8 s8 address"></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">City:- </div>
+                    <div class="col m8 s8 city" class=''></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">Pincode:- </div>
+                    <div class="col m8 s8 pincode"></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">Phone Number:- </div>
+                    <div class="col m8 s8 phonenumber"></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">Extra Comment:- </div>
+                    <div class="col m8 s8 comment"></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">Chesses:- </div>
+                    <div class="col m8 s8 cheeses"></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">Toppings:- </div>
+                    <div class="col m8 s8 toppings"></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">Sauces:- </div>
+                    <div class="col m8 s8 sauces"></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">Crust:- </div>
+                    <div class="col m8 s8 crust"></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">Size:- </div>
+                    <div class="col m8 s8 size"></div>
+                </div>
+                <div class="row">
+                    <div class="col m3 s3">Total:- </div>
+                    <div class="col m8 s8 total"></div>
+                </div>
+
+                <a class="waves-effect waves-light btn" onclick="$('.confirm_details').show(); $('.basic_details').show();">Edit</a><a class="waves-effect waves-light btn" onclick="place();">place order</a>
+
+
+            </div>
         </div>
-        <div class="container white" style="margin: 6px; border-radius: 5px; width: 98%; height: 98%; border: 2px solid #ffffff;">
-        </div>
-    </body>
+        <script>
+            $(".select_cheeses").hide();
+            $(".select_toppings").hide();
+            $(".select_sauces").hide();
+            $(".select_crust").hide();
+            $(".select_size").hide();
+            $(".basic_details").hide();
+            $(".confirm_details").hide();
+            $.getJSON('http://138.197.124.3:8080/get_cheeses', function(jd) {
+                jd.cheeses.forEach(function(cheese, index) {
+                    //alert(JSON.stringify(chesse));
+                    $(".cheeses").html($(".cheeses").html() + "<div class='col m6 s6'><input type='checkbox' value='" + cheese.type + "' cost='" + cheese.cost + "' id='cheese" + index + "'> <label style='color:black;' for='cheese" + index + "'>" + cheese.type + "(" + cheese.cost + ")" + "</label></div>");
+                });
+            });
+
+            $.getJSON('http://138.197.124.3:8080/get_toppings', function(jd) {
+                jd.toppings.forEach(function(topping, index) {
+                    //alert(JSON.stringify(chesse));
+                    $(".toppings").html($(".toppings").html() + "<div class='col m6 s6'><input type='checkbox' value='" + topping.type + "' cost='" + topping.cost + "' id='topping" + index + "'> <label style='color:black;' for='topping" + index + "'>" + topping.type + "(" + topping.cost + ")" + "</label></div>");
+                });
+            });
+            $.getJSON('http://138.197.124.3:8080/get_sauces', function(jd) {
+                jd.sauces.forEach(function(sauces, index) {
+                    //alert(JSON.stringify(chesse));
+                    $(".sauces").html($(".sauces").html() + "<div class='col m6 s6'><input type='checkbox' value='" + sauces.type + "' cost='" + sauces.cost + "' id='sauces" + index + "'> <label style='color:black;' for='sauces" + index + "'>" + sauces.type + "(" + sauces.cost + ")" + "</label></div>");
+                });
+            });
+            $.getJSON('http://138.197.124.3:8080/get_crustes', function(jd) {
+                jd.crustes.forEach(function(crustes, index) {
+                    //alert(JSON.stringify(chesse));
+                    $(".crustes").html($(".crustes").html() + "<div class='col m6 s6'><input type='radio' name='crust' value='" + crustes.type + "' cost='" + crustes.cost + "' id='crustes" + index + "'> <label style='color:black;' for='crustes" + index + "'>" + crustes.type + "(" + crustes.cost + ")" + "</label></div>");
+                    $("#crustes0").attr('checked', 'checked');
+                });
+            });
+            $.getJSON('http://138.197.124.3:8080/get_sizes', function(jd) {
+                jd.sizes.forEach(function(sizes, index) {
+                    //alert(JSON.stringify(chesse));
+                    $(".sizes").html($(".sizes").html() + "<div class='col m6 s6'><input type='radio' name='size' value='" + sizes.size + "' cost='" + sizes.cost + "'  id='sizes" + index + "'> <label style='color:black;' for='sizes" + index + "'>" + sizes.size + "(" + sizes.cost + ")" + "</label></div>");
+                    $("#sizes0").attr('checked', 'checked');
+                });
+            });
+
+            var cheeses = [];
+            var toppings = [];
+            var sauces = [];
+            var cntc = 0;
+            var cntt = 0;
+            var cnts = 0;
+            var costc = 0;
+            var costt = 0;
+            var costs = 0;
+            var cost_c = 0;
+            var cost_s = 0;
+            var crust;
+            var size;
+
+            function fill() {
+
+                var searchIDs = $('input:checked').map(function() {
+                    id = $(this).attr("id");
+                    //alert($(this).val());
+                    if (id.indexOf("cheese") >= 0) {
+                        cheeses[cntc++] = $(this).val();
+                        costc += parseInt($(this).attr("cost"), 10);
+                    } else if (id.indexOf("topping") >= 0) {
+                        toppings[cntt++] = $(this).val();
+                        costt += parseInt($(this).attr("cost"), 10);
+                    } else if (id.indexOf("sauces") >= 0) {
+                        sauces[cnts++] = $(this).val();
+                        costs += parseInt($(this).attr("cost"), 10);
+                    }
+                });
+
+                crust = $("input[name='crust']:checked").val();
+                size = $("input[name='size']:checked").val();
+                cost_c = parseInt($("input[name='crust']:checked").attr("cost"), 10);
+                cost_s = parseInt($("input[name='crust']:checked").attr("cost"), 10);
+
+                $(".name").html($("#full_name").val());
+                $(".phonenumber").html($("#phonenumber").val());
+                $(".address").html($("#address").val());
+                $(".city").html($("#city").val());
+                $(".address").html($("#address").val());
+                $(".pincode").html($("#pincode").val());
+                $(".comment").html($("#comment").val());
+                $(".cheeses").html(cheeses.toString() + "<br> Total Cost: " + costc);
+                $(".toppings").html(toppings.toString() + "<br> Total Cost: " + costt);
+                $(".sauces").html(sauces.toString() + "<br> Total Cost: " + costs);
+                $(".crust").html(crust + "<br> Cost: " + cost_c);
+                $(".size").html(size + "<br> Cost: " + cost_s);
+                $(".total").html(cost_c + " + " + cost_s + " + " + costc + " + " + costs + " + " + costt + " + " + cost_c + " + " + cost_s + " + 60 = " + (costc + costs + costt + cost_c + cost_s + 60));
+                $('.basic_details').hide();
+                $('.confirm_details').show();
+            }
+
+            function place() {
+                var url = "http://138.197.124.3:8080/place_order?cheeses=" + cheeses.join("&cheeses=") + "&toppings=" + toppings.join("&toppings=") + "&sauces=" + sauces.join("&sauces=") + "&crust=" + crust + "&size=" + size + "&comment=" + $("#comment").val() + "&name=" + $("#full_name").val() + "&address=" + $("#address").val() + "&city=" + $("#city").val() + "&pincode=" + $("#pincode").val() + "&phone_number=" + $("#phonenumber").val() + "&total_price=" + (costc + costs + costt + cost_c + cost_s + 60) + "&date_time=" + new Date() + "&status=placed";
+                $.getJSON(url, function(jd) {
+                    if (jd.error == 0) {
+                        alert("Order Successfully placed");
+                        $('.confirm_details').hide();
+                        $('.orders').show();
+                    }
+                });
+            }
+        </script>
+    </div>
+    <script>
+        if ((localStorage.getItem("pizza_orders") === null) || (localStorage.getItem("pizza_orders") === '0')) {
+            $(".no_orders").html("<blockquote>No past orders,<br>click '+' to place order!</blockquote>");
+        }
+    </script>
+</body>
+
 </html>
