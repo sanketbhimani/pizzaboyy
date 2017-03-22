@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <script src="./js/jquery-3.2.0.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="./js/materialize.min.js"></script>
     <!--<script src="./js/app.js"></script>-->
     <link rel="stylesheet" href="./css/materialize.min.css" />
@@ -31,18 +31,11 @@
 
     </div>
     <script>
-        $.ajax({
-            url: "https://www.google.co.in",
-            timeout: 10000,
-            error: function(jqXHR) {
-                if (jqXHR.status == 0) {
-                    alert(" fail to connect, please check your connection settings");
-                }
-            },
-            success: function() {
-                window.location.href = 'main.html';
-            }
-        });
+        if (!window.jQuery) {
+            alert('No internet Connection !!');
+        } else {
+            window.location.href = 'main.html';
+        }
     </script>
 
 </body>
