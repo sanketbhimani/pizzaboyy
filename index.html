@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="./css/materialize.min.css" />
     <link rel="stylesheet prefetch" href="./font/font" />
     <!--<link rel="manifest" href="manifest.json">-->
-    <meta name="theme-color" content="#EF5350">
-    
    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PizzaBoyy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PizzaBoyy</title>
 </head>
@@ -225,21 +227,9 @@
                 </div>
             </div>
         </div>
-        <div class="preloader-wrapper big active">
-            <div class="spinner-layer spinner-blue-only">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-        </div>
+      
     </div>
-    <div id="loader" style='position: absolute; left:150; top:180; z-index: 2000;' class="preloader-wrapper big active">
+   <!-- <div id="loader" style='position: absolute; left:180; right:150; z-index: 2000;' class="preloader-wrapper big active">
         <div class="spinner-layer spinner-blue-only">
             <div class="circle-clipper left">
                 <div class="circle"></div>
@@ -251,12 +241,12 @@
                 <div class="circle"></div>
             </div>
         </div>
-    </div>
+    </div>-->
     <script>
         $(document).ready(function() {
             fill_order();
-         
-       
+            $('.container').hide();
+           // $('.loader').show();
         });
 
         function fill_order() {
@@ -304,39 +294,37 @@
         $(".order_details").hide();
 
         $.getJSON('http://138.197.124.3:8080/get_cheeses', function(jd) {
-            alert(JSON.stringify(jd));
             jd.cheeses.forEach(function(cheese, index) {
                 $(".scheeses").html($(".scheeses").html() + "<div class='col m6 s6'><input type='checkbox' value='" + cheese.type + "' cost='" + cheese.cost + "' id='cheese" + index + "'> <label style='color:black;' for='cheese" + index + "'>" + cheese.type + "(" + cheese.cost + ")" + "</label></div>");
             });
-        });     
+        });
+
         $.getJSON('http://138.197.124.3:8080/get_toppings', function(jd) {
             jd.toppings.forEach(function(topping, index) {
                 $(".stoppings").html($(".stoppings").html() + "<div class='col m6 s6'><input type='checkbox' value='" + topping.type + "' cost='" + topping.cost + "' id='topping" + index + "'> <label style='color:black;' for='topping" + index + "'>" + topping.type + "(" + topping.cost + ")" + "</label></div>");
             });
-
-        });             
-         $.getJSON('http://138.197.124.3:8080/get_sauces', function(jd) {
+            $.getJSON('http://138.197.124.3:8080/get_sauces', function(jd) {
                 jd.sauces.forEach(function(sauces, index) {
                     $(".ssauces").html($(".ssauces").html() + "<div class='col m6 s6'><input type='checkbox' value='" + sauces.type + "' cost='" + sauces.cost + "' id='sauces" + index + "'> <label style='color:black;' for='sauces" + index + "'>" + sauces.type + "(" + sauces.cost + ")" + "</label></div>");
                 });
-            
-            });
-        
-    $.getJSON('http://138.197.124.3:8080/get_crustes', function(jd) {
+                $.getJSON('http://138.197.124.3:8080/get_crustes', function(jd) {
                     jd.crustes.forEach(function(crustes, index) {
                         $(".scrustes").html($(".scrustes").html() + "<div class='col m6 s6'><input type='radio' name='crust' value='" + crustes.type + "' cost='" + crustes.cost + "' id='crustes" + index + "'> <label style='color:black;' for='crustes" + index + "'>" + crustes.type + "(" + crustes.cost + ")" + "</label></div>");
                         $("#crustes0").attr('checked', 'checked');
                     });
-                    
-                });
-        $.getJSON('http://138.197.124.3:8080/get_sizes', function(jd) {
+                    $.getJSON('http://138.197.124.3:8080/get_sizes', function(jd) {
                         jd.sizes.forEach(function(sizes, index) {
                             $(".ssizes").html($(".ssizes").html() + "<div class='col m6 s6'><input type='radio' name='size' value='" + sizes.size + "' cost='" + sizes.cost + "'  id='sizes" + index + "'> <label style='color:black;' for='sizes" + index + "'>" + sizes.size + "(" + sizes.cost + ")" + "</label></div>");
                             $("#sizes0").attr('checked', 'checked');
                         });
-     
-  
-                    });        
+                        $('.container').show();
+                       // $('.loader').hide();
+                    });
+                });
+            });
+        });
+
+
         var cheeses = [];
         var toppings = [];
         var sauces = [];
@@ -406,7 +394,7 @@
 
         function place() {
             $('.container').hide();
-            $('.loader').show();
+           // $('.loader').show();
             var url = "http://138.197.124.3:8080/place_order?cheeses=" + cheeses.join("&cheeses=") + "&toppings=" + toppings.join("&toppings=") + "&sauces=" + sauces.join("&sauces=") + "&crust=" + crust + "&size=" + size + "&comment=" + $("#comment").val() + "&name=" + $("#full_name").val() + "&address=" + $("#address").val() + "&city=" + $("#city").val() + "&pincode=" + $("#pincode").val() + "&phone_number=" + $("#phonenumber").val() + "&total_price=" + (costc + costs + costt + cost_c + cost_s + 60) + "&date_time=" + new Date() + "&status=placed";
             $.getJSON(url, function(jd) {
                 if (jd.error == 0) {
@@ -422,7 +410,7 @@
                     $('.orders').show();
                     $('#add_btn').show();
                     $('.container').show();
-                    $('.loader').hide();
+                  //  $('.loader').hide();
                 }
             });
         }
