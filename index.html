@@ -309,9 +309,7 @@
             jd.cheeses.forEach(function(cheese, index) {
                 $(".scheeses").html($(".scheeses").html() + "<div class='col m6 s6'><input type='checkbox' value='" + cheese.type + "' cost='" + cheese.cost + "' id='cheese" + index + "'> <label style='color:black;' for='cheese" + index + "'>" + cheese.type + "(" + cheese.cost + ")" + "</label></div>");
             });
-        });
-
-        $.getJSON('http://138.197.124.3:8080/get_toppings', function(jd) {
+             $.getJSON('http://138.197.124.3:8080/get_toppings', function(jd) {
             jd.toppings.forEach(function(topping, index) {
                 $(".stoppings").html($(".stoppings").html() + "<div class='col m6 s6'><input type='checkbox' value='" + topping.type + "' cost='" + topping.cost + "' id='topping" + index + "'> <label style='color:black;' for='topping" + index + "'>" + topping.type + "(" + topping.cost + ")" + "</label></div>");
             });
@@ -334,7 +332,10 @@
                     });
                 });
             });
+        });            
         });
+
+       
 
 
         var cheeses = [];
