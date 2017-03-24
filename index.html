@@ -245,7 +245,7 @@
     <script>
         $(document).ready(function() {
             fill_order();
-            $('.container').hide();
+            //$('.container').hide();
            // $('.loader').show();
         });
 
@@ -317,7 +317,7 @@
                             $(".ssizes").html($(".ssizes").html() + "<div class='col m6 s6'><input type='radio' name='size' value='" + sizes.size + "' cost='" + sizes.cost + "'  id='sizes" + index + "'> <label style='color:black;' for='sizes" + index + "'>" + sizes.size + "(" + sizes.cost + ")" + "</label></div>");
                             $("#sizes0").attr('checked', 'checked');
                         });
-                        $('.container').show();
+                       // $('.container').show();
                        // $('.loader').hide();
                     });
                 });
@@ -393,7 +393,7 @@
         }
 
         function place() {
-            $('.container').hide();
+            //$('.container').hide();
            // $('.loader').show();
             var url = "http://138.197.124.3:8080/place_order?cheeses=" + cheeses.join("&cheeses=") + "&toppings=" + toppings.join("&toppings=") + "&sauces=" + sauces.join("&sauces=") + "&crust=" + crust + "&size=" + size + "&comment=" + $("#comment").val() + "&name=" + $("#full_name").val() + "&address=" + $("#address").val() + "&city=" + $("#city").val() + "&pincode=" + $("#pincode").val() + "&phone_number=" + $("#phonenumber").val() + "&total_price=" + (costc + costs + costt + cost_c + cost_s + 60) + "&date_time=" + new Date() + "&status=placed";
             $.getJSON(url, function(jd) {
@@ -409,7 +409,7 @@
                     $('.confirm_details').hide();
                     $('.orders').show();
                     $('#add_btn').show();
-                    $('.container').show();
+                    //$('.container').show();
                   //  $('.loader').hide();
                 }
             });
