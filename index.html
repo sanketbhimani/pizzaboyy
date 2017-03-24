@@ -304,6 +304,7 @@
         $(".order_details").hide();
 
         $.getJSON('http://138.197.124.3:8080/get_cheeses', function(jd) {
+            alert(JSON.stringify(jd));
             jd.cheeses.forEach(function(cheese, index) {
                 $(".scheeses").html($(".scheeses").html() + "<div class='col m6 s6'><input type='checkbox' value='" + cheese.type + "' cost='" + cheese.cost + "' id='cheese" + index + "'> <label style='color:black;' for='cheese" + index + "'>" + cheese.type + "(" + cheese.cost + ")" + "</label></div>");
             });
