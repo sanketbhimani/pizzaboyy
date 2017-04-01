@@ -354,16 +354,16 @@
                 }
             });
 
-            if (cheeses.length == 0) {
-                alert('Select atleast one cheese!');
+            if (cheeses.length < 2) {
+                alert('Select atleast two cheese!');
                 $('.select_cheeses').show();
                 $('.basic_details').hide();
-            } else if (toppings.length == 0) {
-                alert('Select atleast one topping!');
+            } else if (toppings.length < 2) {
+                alert('Select atleast two topping!');
                 $('.select_toppings').show();
                 $('.basic_details').hide();
-            } else if (sauces.length == 0) {
-                alert('Select atleast one sauce!');
+            } else if (sauces.length < 2) {
+                alert('Select atleast two sauce!');
                 $('.basic_details').hide();
                 $('.select_sauces').show();
             } else if ($("#full_name").val() == '' || $("#phonenumber").val() == '' || $("#city").val() == '' || $("#address").val() == '' || $("#pincode").val() == '') {
